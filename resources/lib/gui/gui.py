@@ -114,7 +114,6 @@ class cGui:
 
         oListItem = xbmcgui.ListItem(itemTitle, oGuiElement.getTitleSecond(), oGuiElement.getIcon(), oGuiElement.getThumbnail())
         oListItem.setInfo(oGuiElement.getType(), itemValues)
-        oListItem.setProperty('fanart_image', oGuiElement.getFanart())
         aProperties = oGuiElement.getItemProperties()
         if len(aProperties)>0:
             for sPropertyKey in aProperties.keys():

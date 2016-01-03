@@ -17,7 +17,6 @@ class cGuiElement:
     '''
 
     DEFAULT_FOLDER_ICON = 'DefaultFolder.png'
-    DEFAULT_FANART = path.join(addon.getAddonInfo('path'),'fanart.jpg')
     MEDIA_TYPES = ['movie','tvshow','season','episode']
 
     def __init__(self, sTitle = '', sSite = None, sFunction = None):
@@ -31,7 +30,6 @@ class cGuiElement:
         self.__aItemValues = {}
         self.__aProperties = {}
         self.__aContextElements = []
-        self.__sFanart = self.DEFAULT_FANART
         self.__sSiteName = sSite
         self.__sFunctionName = sFunction
         self._sLanguage = ''
@@ -141,12 +139,6 @@ class cGuiElement:
     def getIcon(self):
         return self.__sIcon
 
-    def setFanart(self, sFanart):
-        self.__sFanart = sFanart
-
-    def getFanart(self):
-        return self.__sFanart
-
     def addItemValue(self, sItemKey, sItemValue):
         self.__aItemValues[sItemKey] = sItemValue
 
@@ -239,15 +231,11 @@ class cGuiElement:
             self.setItemValues(meta)
             if not meta['cover_url'] == '':
                 self.setThumbnail(meta['cover_url'])
-            if not meta['backdrop_url'] == '':
-                self.setFanart(meta['backdrop_url'])
         else:
             meta.update(self.__aItemValues)
             meta.update(self.__aProperties)
             if meta['cover_url'] != '' and self.__sThumbnail == '':
                 self.setThumbnail(meta['cover_url'])
-            if meta['backdrop_url'] != '' and self.__sFanart == self.DEFAULT_FANART:
-                self.setFanart(meta['backdrop_url'])
             self.setItemValues(meta)
 
         if meta['imdb_id']:
