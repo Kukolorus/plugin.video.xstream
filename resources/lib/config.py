@@ -7,8 +7,8 @@ class cConfig:
 
     def __check(self):
         try:
-            import xbmcaddon           
-            self.__bIsDharma = True            
+            import xbmcaddon
+            self.__bIsDharma = True
         except ImportError:
             self.__bIsDharma = False
 
@@ -23,13 +23,13 @@ class cConfig:
 
     def isDharma(self):
         return self.__bIsDharma
-        
+
 
     def showSettingsWindow(self):
         if (self.__bIsDharma):
             self.__oSettings.openSettings()
         else:
-            try:		
+            try:
                 xbmcplugin.openSettings( sys.argv[ 0 ] )
             except:
                 pass
@@ -38,16 +38,16 @@ class cConfig:
         if (self.__bIsDharma):
             return self.__oSettings.getSetting(sName)
         else:
-            try:                
+            try:
                 return xbmcplugin.getSetting(sName)
             except:
                 return ''
 
     def getLocalizedString(self, sCode):
         if (self.__bIsDharma):
-            return self.__aLanguage(sCode)
+            return self.__aLanguage(sCode).encode('utf-8')
         else:
-            try:		
-                 return xbmc.getLocalizedString(sCode)
+            try:
+                 return xbmc.getLocalizedString(sCode).encode('utf-8')
             except:
                 return ''
