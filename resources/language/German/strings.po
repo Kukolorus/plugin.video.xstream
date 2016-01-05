@@ -113,30 +113,6 @@ msgctxt "#30084"
 msgid "Password"
 msgstr "Passwort"
 
-msgctxt "#30302"
-msgid "Seasons german"
-msgstr "Staffeln Deutsch"
-
-msgctxt "#30303"
-msgid "Seasons english"
-msgstr "Staffeln Englisch"
-
-msgctxt "#30304"
-msgid "Search"
-msgstr "Suche"
-
-msgctxt "#30305"
-msgid "Season %s"
-msgstr "Staffel %s"
-
-msgctxt "#30306"
-msgid "%s to %s Sekunde"
-msgstr "%s bis %s Sekunde"
-
-msgctxt "#30307"
-msgid "alle abspielen"
-msgstr "alle abspielen"
-
 msgctxt "#30308"
 msgid "Wartezeit"
 msgstr "Wartezeit"
@@ -144,7 +120,3 @@ msgstr "Wartezeit"
 msgctxt "#30309"
 msgid "Bitte warte %s Sekunden"
 msgstr "Bitte warte %s Sekunden"
-
-msgctxt "#30402"
-msgid "Laender"
-msgstr "Laender"
