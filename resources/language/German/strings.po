@@ -180,3 +180,7 @@ msgstr "Beliebteste Dokumentationen"
 msgctxt "#30317"
 msgid "New Documentations"
 msgstr "Neuste Dokumentationen"
+
+msgctxt "#30318"
+msgid "Next Page"
+msgstr "Nächste Seite"

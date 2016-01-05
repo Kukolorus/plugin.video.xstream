@@ -190,3 +190,7 @@ msgstr ""
 msgctxt "#30317"
 msgid "New Documentations"
 msgstr ""
+
+msgctxt "#30318"
+msgid "Next Page"
+msgstr ""
