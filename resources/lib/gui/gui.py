@@ -89,7 +89,8 @@ class cGui:
         '''
         inserts a standard "next page" button into a listing
         '''
-        guiElement = cGuiElement('Next Page -->',site,function)
+        sNext = cConfig().getLocalizedString(30318) + ' -->'
+        guiElement = cGuiElement(str(sNext),site,function)
         self.addFolder(guiElement, oParams)
 
 
