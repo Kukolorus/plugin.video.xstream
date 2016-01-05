@@ -129,6 +129,18 @@ msgctxt "#30304"
 msgid "Season"
 msgstr "Staffel"
 
+msgctxt "#30305"
+msgid "News from Today"
+msgstr "Neues von Heute"
+
+msgctxt "#30306"
+msgid "Movies"
+msgstr "Filme"
+
+msgctxt "#30307"
+msgid "TV-Shows"
+msgstr "Serien"
+
 msgctxt "#30308"
 msgid "Waiting time"
 msgstr "Wartezeit"
@@ -136,3 +148,35 @@ msgstr "Wartezeit"
 msgctxt "#30309"
 msgid "Please wait %s seconds"
 msgstr "Bitte warte %s Sekunden"
+
+msgctxt "#30310"
+msgid "Documentations"
+msgstr "Dokumentationen"
+
+msgctxt "#30311"
+msgid "Cinema Movies"
+msgstr "Kinofilme"
+
+msgctxt "#30312"
+msgid "Genres"
+msgstr "Genres"
+
+msgctxt "#30313"
+msgid "Popular Movies"
+msgstr "Beliebteste Filme"
+
+msgctxt "#30314"
+msgid "Popular TV-Shows"
+msgstr "Beliebteste Serien"
+
+msgctxt "#30315"
+msgid "New TV-Shows"
+msgstr "Neuste Serien"
+
+msgctxt "#30316"
+msgid "Popular Documentations"
+msgstr "Beliebteste Dokumentationen"
+
+msgctxt "#30317"
+msgid "New Documentations"
+msgstr "Neuste Dokumentationen"
