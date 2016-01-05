@@ -23,9 +23,9 @@ URL_COVER = 'http://s.bs.to/img/cover/%s.jpg|encoding=gzip'
 def load():
     logger.info("Load %s" % SITE_NAME)
     oGui = cGui()
-    oGui.addFolder(cGuiElement('Alle Serien', SITE_IDENTIFIER, 'showSeries'))
+    oGui.addFolder(cGuiElement(cConfig().getLocalizedString(30302), SITE_IDENTIFIER, 'showSeries'))
     oGui.addFolder(cGuiElement('A-Z', SITE_IDENTIFIER, 'showCharacters'))
-    oGui.addFolder(cGuiElement('Suche', SITE_IDENTIFIER, 'showSearch'))
+    oGui.addFolder(cGuiElement(cConfig().getLocalizedString(30301), SITE_IDENTIFIER, 'showSearch'))
     oGui.setEndOfDirectory()
 
 ### Mainmenu entries
@@ -120,10 +120,10 @@ def showSeasons():
     for i in range(rangeStart, total + 1):
         seasonNum = str(i)
         if i is 0:
-            seasonTitle = 'Film(e)'
+            seasonTitle = cConfig().getLocalizedString(30303)
             dialogType = 'showCinemaMovies'
         else:
-            seasonTitle = '%s - Staffel %s' %(sTitle, seasonNum)
+            seasonTitle = sTitle + ' - ' + cConfig().getLocalizedString(30304) + ' ' + seasonNum
             dialogType = 'showEpisodes'
         guiElement = cGuiElement(seasonTitle, SITE_IDENTIFIER, dialogType)
         guiElement.setMediaType('season')

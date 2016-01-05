@@ -113,10 +113,26 @@ msgctxt "#30084"
 msgid "Password"
 msgstr "Passwort"
 
+msgctxt "#30301"
+msgid "Search"
+msgstr "Suche"
+
+msgctxt "#30302"
+msgid "All TV-Shows"
+msgstr "Alle Serien"
+
+msgctxt "#30303"
+msgid "Movie(s)"
+msgstr "Film(e)"
+
+msgctxt "#30304"
+msgid "Season"
+msgstr "Staffel"
+
 msgctxt "#30308"
-msgid "Wartezeit"
+msgid "Waiting time"
 msgstr "Wartezeit"
 
 msgctxt "#30309"
-msgid "Bitte warte %s Sekunden"
+msgid "Please wait %s seconds"
 msgstr "Bitte warte %s Sekunden"
