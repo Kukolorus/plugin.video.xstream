@@ -10,10 +10,10 @@ class cGuiElement:
 
     Kwargs:
         sTitle    (str): title/label oft the GuiElement/listitem
-        sSite     (str): siteidentifier of the siteplugin, which is called if the GuiElement is selected 
+        sSite     (str): siteidentifier of the siteplugin, which is called if the GuiElement is selected
         sFunction (str): name of the function, which is called if the GuiElement is selected
-    
-        These arguments are mandatory. If not given on init, they have to be set by their setter-methods, before the GuiElement is added to the Gui. 
+
+        These arguments are mandatory. If not given on init, they have to be set by their setter-methods, before the GuiElement is added to the Gui.
     '''
 
     DEFAULT_FOLDER_ICON = 'DefaultFolder.png'
@@ -140,7 +140,7 @@ class cGuiElement:
 
     def getIcon(self):
         return self.__sIcon
-    
+
     def setFanart(self, sFanart):
         self.__sFanart = sFanart
 
@@ -149,7 +149,7 @@ class cGuiElement:
 
     def addItemValue(self, sItemKey, sItemValue):
         self.__aItemValues[sItemKey] = sItemValue
-        
+
     def setItemValues(self, aValueList):
         self.__aItemValues = aValueList
 
@@ -160,10 +160,10 @@ class cGuiElement:
         for sPropertyKey in self.__aProperties.keys():
             self.__aItemValues[sPropertyKey] = self.__aProperties[sPropertyKey]
         return self.__aItemValues
-    
+
     def addItemProperties(self, sPropertyKey, sPropertyValue):
         self.__aProperties[sPropertyKey] = sPropertyValue
-  
+
     def getItemProperties(self):
         for sItemValueKey in self.__aItemValues.keys():
             if not self.__aItemValues[sItemValueKey]=='':
