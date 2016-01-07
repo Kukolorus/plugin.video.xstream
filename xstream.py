@@ -265,26 +265,24 @@ def searchGlobal():
     import threading
     oGui = cGui()
     sSearchText = oGui.showKeyBoard()
-    if sSearchText:
-        aPlugins = []
-        aPlugins = cPluginHandler().getAvailablePlugins()
-        dialog = xbmcgui.DialogProgress()
-        dialog.create('xStream',"Searching...")
-        numPlugins = len(aPlugins)
-        count = 0
-        threads = []
-        for pluginEntry in aPlugins:
-            dialog.update(count*100/numPlugins,'Searching: '+str(pluginEntry['name'])+'...')
-            count += 1
-            logger.info('Searching for %s at %s' % (sSearchText, pluginEntry['id']))
-            t = threading.Thread(target=_pluginSearch, args=(pluginEntry,sSearchText,oGui))
-            threads += [t]
-            t.start()
-        for t in threads:
-            t.join()
-        dialog.close()
-        oGui.setView()
-        oGui.setEndOfDirectory()
+    if not sSearchText: return True
+    aPlugins = []
+    aPlugins = cPluginHandler().getAvailablePlugins()
+    dialog = xbmcgui.DialogProgress()
+    dialog.create('xStream',"Searching...")
+    numPlugins = len(aPlugins)
+    threads = []
+    for count, pluginEntry in enumerate(aPlugins):
+        dialog.update(count*100/numPlugins,'Searching: '+str(pluginEntry['name'])+'...')
+        logger.info('Searching for %s at %s' % (sSearchText, pluginEntry['id']))
+        t = threading.Thread(target=_pluginSearch, args=(pluginEntry,sSearchText,oGui))
+        threads += [t]
+        t.start()
+    for t in threads:
+        t.join()
+    dialog.close()
+    oGui.setView()
+    oGui.setEndOfDirectory()
     return True
 
 def searchAlter(params):
