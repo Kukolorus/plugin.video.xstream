@@ -273,7 +273,7 @@ def searchGlobal():
     numPlugins = len(aPlugins)
     threads = []
     for count, pluginEntry in enumerate(aPlugins):
-        dialog.update(count*100/numPlugins,'Searching: '+str(pluginEntry['name'])+'...')
+        dialog.update((count+1)*100/numPlugins,'Searching: '+str(pluginEntry['name'])+'...')
         logger.info('Searching for %s at %s' % (sSearchText, pluginEntry['id']))
         t = threading.Thread(target=_pluginSearch, args=(pluginEntry,sSearchText,oGui))
         threads += [t]
