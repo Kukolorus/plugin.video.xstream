@@ -296,11 +296,9 @@ def searchAlter(params):
     dialog = xbmcgui.DialogProgress()
     dialog.create('xStream',"Searching...")
     numPlugins = len(aPlugins)
-    count = 0
     threads = []
-    for pluginEntry in aPlugins:
-        dialog.update(count*100/numPlugins,'Searching: '+str(pluginEntry['name'])+'...')
-        count += 1
+    for count, pluginEntry in enumerate(aPlugins):
+        dialog.update((count+1)*100/numPlugins,'Searching: '+str(pluginEntry['name'])+'...')
         logger.info('Searching for ' + searchTitle + pluginEntry['id'].encode('utf-8'))
         t = threading.Thread(target=_pluginSearch, args=(pluginEntry,searchTitle, oGui))
         threads += [t]
