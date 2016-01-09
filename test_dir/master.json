@@ -4,12 +4,12 @@
 	  "release": {
 	    "version": "0.0.1",
 	    "need_main_version": "2.1.15",
-		"url": "https://www.dropbox.com/s/dfuzs8o3vjiamwt/test_com.py?raw=1"
+		"url": "https://raw.githubusercontent.com/seberoth/plugin.video.xstream/site_updater/test_dir/test_com.py"
 	  },
 	  "beta": {
 	    "version": "0.0.1",
 	    "need_main_version": "2.1.15",
-		"url": "https://www.dropbox.com/s/2iyof2j0mpdra1f/test_com_beta.py?raw=1"
+		"url": "https://raw.githubusercontent.com/seberoth/plugin.video.xstream/site_updater/test_dir/test_com_beta.py"
 	  }
     }
   }

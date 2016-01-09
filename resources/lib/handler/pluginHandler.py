@@ -175,7 +175,7 @@ class cPluginHandler:
 
         addon_version = LooseVersion(common.addon.getAddonInfo('version'))
 
-        trustedHosters = ["https://www.dropbox.com/s/16r6suo98omqbr9/master.json?raw=1"]
+        trustedHosters = ["https://raw.githubusercontent.com/seberoth/plugin.video.xstream/site_updater/test_dir/master.json"]
         oRequest = cRequestHandler(trustedHosters[0], False)
         html = oRequest.request()
         json_data = json.loads(html)
