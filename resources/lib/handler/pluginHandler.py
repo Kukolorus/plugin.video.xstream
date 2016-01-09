@@ -190,12 +190,12 @@ class cPluginHandler:
 
                     if beta:
                         beta_version = LooseVersion(sitedata['beta']['version'])
-                        min_addon_version = LooseVersion(sitedata['beta']['needMainVersion'])
+                        min_addon_version = LooseVersion(sitedata['beta']['need_main_version'])
                         if beta_version > cur_version and beta_version > rel_version and min_addon_version <= addon_version:
                             self.__downloadUpdate(plugin['id'], sitedata['beta']['url'])
                             logger.info("BetaUpdateDone")
 
-                    min_addon_version = LooseVersion(sitedata['release']['needMainVersion'])
+                    min_addon_version = LooseVersion(sitedata['release']['need_main_version'])
                     if rel_version > cur_version and min_addon_version >= addon_version:
                         self.__downloadUpdate(plugin['id'], sitedata['release']['url'])
 
