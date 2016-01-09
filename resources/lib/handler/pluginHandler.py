@@ -3,6 +3,8 @@ import os
 import json
 from resources.lib.config import cConfig
 from resources.lib import common, logger
+from resources.lib.handler.requestHandler import cRequestHandler
+from distutils.version import LooseVersion
 
 class cPluginHandler:
 
@@ -16,6 +18,7 @@ class cPluginHandler:
         logger.info('root folder: %s' % self.rootFolder)
         self.defaultFolder =  os.path.join(self.rootFolder, 'sites')
         logger.info('default sites folder: %s' % self.defaultFolder)
+        self.checkForSiteUpdates()
 
     def getAvailablePlugins(self):
         pluginDB = self.__getPluginDB()
@@ -65,7 +68,7 @@ class cPluginHandler:
                 plugin['icon'] = ''
             # existieren zu diesem plugin die an/aus settings
             if oConfig.getSetting(pluginSettingsName) == 'true':
-                    plugins.append(plugin)
+                plugins.append(plugin)
         return plugins
 
     def __updatePluginDB(self, data):
@@ -156,4 +159,54 @@ class cPluginHandler:
             pluginData['settings'] = plugin.SITE_SETTINGS
         except:
             pass
+        try:
+            pluginData['version'] = plugin.SITE_VERSION
+        except:
+            pass
         return pluginData
+
+    def checkForSiteUpdates(self):
+        # ToDo: Add settings for UpdateCheck (Enabled/Disabled, Trusted Hosts,Download beta versions,...)
+        checkForUpdates = False
+        beta = True
+
+        if not checkForUpdates:
+            return
+
+        addon_version = LooseVersion(common.addon.getAddonInfo('version'))
+
+        trustedHosters = ["https://www.dropbox.com/s/16r6suo98omqbr9/master.json?raw=1"]
+        oRequest = cRequestHandler(trustedHosters[0], False)
+        html = oRequest.request()
+        json_data = json.loads(html)
+
+        plugins = self.getAvailablePlugins()
+        for plugin in plugins:
+            if 'version' in plugin:
+                if plugin['id'] in json_data['plugins']:
+                    sitedata = json_data['plugins'][plugin['id']]
+                    cur_version = LooseVersion(plugin['version'])
+                    rel_version = LooseVersion(sitedata['release']['version'])
+
+                    if beta:
+                        beta_version = LooseVersion(sitedata['beta']['version'])
+                        min_addon_version = LooseVersion(sitedata['beta']['needMainVersion'])
+                        if beta_version > cur_version and beta_version > rel_version and min_addon_version <= addon_version:
+                            self.__downloadUpdate(plugin['id'], sitedata['beta']['url'])
+                            logger.info("BetaUpdateDone")
+
+                    min_addon_version = LooseVersion(sitedata['release']['needMainVersion'])
+                    if rel_version > cur_version and min_addon_version >= addon_version:
+                        self.__downloadUpdate(plugin['id'], sitedata['release']['url'])
+
+    def __downloadUpdate(self, id, url):
+        oRequest = cRequestHandler(url, False)
+        html = oRequest.request()
+
+        try:
+            path = os.path.join(self.defaultFolder, id + ".py")
+            f = open(path, "w")
+            f.write(html)
+            f.close()
+        except:
+            pass
