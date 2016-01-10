@@ -39,7 +39,7 @@ def checkSettings():
 
     # Plugin sites
     plugins = cPluginHandler()
-    oSettingsHandler = plugins.get_settings(oSettingsHandler)
+    oSettingsHandler = plugins.getSettings(oSettingsHandler)
 
     # Automatic views
     oSettingsHandler.addCategory('Views', 'view_settings')
