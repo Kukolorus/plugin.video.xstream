@@ -78,7 +78,7 @@ class cPluginHandler:
         oSettingsHandler.addCategory('30022', 'site_settings')
 
         for pluginEntry in aPlugins:
-            oSettingsHandler.addBool('site_settings', 'enable_%s' % pluginEntry['id'], '???', 'false')
+            oSettingsHandler.addBool('site_settings', pluginEntry['id'], pluginEntry['name'], 'false')
             try:
                 plugin = __import__(pluginEntry['id'], globals(), locals())
                 function = getattr(plugin, 'get_settings')

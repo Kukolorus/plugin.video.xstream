@@ -8,8 +8,8 @@ class cSettingsHandler():
         self.__data['childs'] = []
         pass
 
-    def addSeperator(self, parent):
-        child = {'attr': {"type": "sep"}}
+    def addSeperator(self, parent, label = ''):
+        child = {'attr': {"type": "sep", "label": label}}
         self.__addToParent(self.__data, parent, child)
 
     def addText(self, parent, id, label, default, enable='', option=''):
@@ -38,6 +38,9 @@ class cSettingsHandler():
         if enable:
             child['attr']['enable'] = enable
         self.__addToParent(self.__data, parent, child)
+
+    def addFolder(self, parent, id, label, default, enable=''):
+        self.__addSetting("folder", parent, id, label, default, enable)
 
     def compile(self):
         logger.info("SettingsDebug: %s" % self.__data)
