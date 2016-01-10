@@ -392,6 +392,6 @@ def getHosterUrl(sUrl = False):
     return results
 
 def get_settings(oSettingsHandler):
-    oSettingsHandler.addText('site_settings', '%s_username' % SITE_IDENTIFIER, 'Username', '', 'eq(-1,false)')
-    oSettingsHandler.addText('site_settings', '%s_password' % SITE_IDENTIFIER, 'Password', '', 'eq(-2,false)', 'hidden')
+    oSettingsHandler.addText('site_settings', '%s-username' % SITE_IDENTIFIER, 'Username', '', 'eq(-1,false)')
+    oSettingsHandler.addText('site_settings', '%s-password' % SITE_IDENTIFIER, 'Password', '', 'eq(-2,false)', 'hidden')
     return oSettingsHandler

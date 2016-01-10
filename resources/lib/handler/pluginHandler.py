@@ -20,7 +20,7 @@ class cPluginHandler:
         logger.info('default sites folder: %s' % self.defaultFolder)
         self.checkForSiteUpdates()
 
-    def getAvailablePlugins(self):
+    def getAvailablePlugins(self, active_only = True):
         pluginDB = self.__getPluginDB()
         # default plugins
         update = False
@@ -51,9 +51,9 @@ class cPluginHandler:
         if update or deletions:
             self.__updateSettings(pluginDB)
             self.__updatePluginDB(pluginDB)
-        return self.getAvailablePluginsFromDB()
+        return self.getAvailablePluginsFromDB(active_only)
 
-    def getAvailablePluginsFromDB(self):
+    def getAvailablePluginsFromDB(self, active_only = True):
         plugins = []
         oConfig = cConfig()
         iconFolder = os.path.join(self.rootFolder, 'resources','art','sites')
@@ -67,17 +67,20 @@ class cPluginHandler:
             else:
                 plugin['icon'] = ''
             # existieren zu diesem plugin die an/aus settings
-            if oConfig.getSetting(pluginSettingsName) == 'true':
+            if active_only and oConfig.getSetting(pluginSettingsName) == 'true':
+                plugins.append(plugin)
+            elif not active_only:
                 plugins.append(plugin)
         return plugins
 
     def get_settings(self, oSettingsHandler):
         aPlugins = []
-        aPlugins = self.getAvailablePlugins()
+        aPlugins = self.getAvailablePlugins(False)
 
         oSettingsHandler.addCategory('30022', 'site_settings')
 
         for pluginEntry in aPlugins:
+            oSettingsHandler.addLSeperator('site_settings', pluginEntry['name'])
             oSettingsHandler.addBool('site_settings', pluginEntry['id'], pluginEntry['name'], 'false')
             try:
                 plugin = __import__(pluginEntry['id'], globals(), locals())
@@ -111,7 +114,10 @@ class cPluginHandler:
         '''
         xmlString = '<plugin_settings>%s</plugin_settings>'
         import xml.etree.ElementTree as ET
-        tree = ET.parse(self.settingsFile)
+        try:
+            tree = ET.parse(self.settingsFile)
+        except:
+            return
         #find Element for plugin Settings
         pluginElem = False
         for elem in tree.findall('category'):
@@ -181,6 +187,24 @@ class cPluginHandler:
         except:
             pass
         return pluginData
+
+    def get_updater_settings(self, oSettingsHandler):
+        oSettingsHandler.addCategory('Site Updater', 'updater_settings')
+        oSettingsHandler.addBool('updater_settings', 'enable_site_updater', 'Enable Site-Updater', 'false')
+        oSettingsHandler.addBool('updater_settings', 'enable_site_updater_beta', 'Include Beta releases', 'false', 'eq(-1,false)')
+
+        # This or a static version?
+        # If this, add file generation after change
+        oConfig = cConfig()
+
+        for i in range(1, 10):
+            oSettingsHandler.addText('updater_settings', 'site_updater_host_%s' % str(i), 'Host #%s' % str(i), '')
+            host = oConfig.getSetting('site_updater_host_%s' % str(i))
+            if not host:
+                break
+
+        return oSettingsHandler
+
 
     def checkForSiteUpdates(self):
         # ToDo: Add settings for UpdateCheck (Enabled/Disabled, Trusted Hosts,Download beta versions,...)

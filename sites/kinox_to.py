@@ -887,3 +887,7 @@ def __getDetails(sHtmlContent):
         aDetails['genre'] = aResult[1][0][3]
         aDetails['playcount'] = oParser.getNumberFromString(aResult[1][0][4])
     return aDetails
+
+def get_settings(oSettingsHandler):
+    oSettingsHandler.addLabelEnum('site_settings', '%s-domain' % SITE_IDENTIFIER, 'Kinox domain', 'kinox.to', 'kinox.to|kinox.me|kinox.tv', 'eq(-1,false)')
+    return oSettingsHandler

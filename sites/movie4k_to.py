@@ -679,3 +679,7 @@ def __createMainMenuItem(oGui, sTitle, sUrl, sFunction):
     if (sUrl != ''):
         oOutputParameterHandler.setParam('sUrl', sUrl)
     oGui.addFolder(oGuiElement, oOutputParameterHandler)
+
+def get_settings(oSettingsHandler):
+    oSettingsHandler.addLabelEnum('site_settings', '%s-domain' % SITE_IDENTIFIER, 'Movie4k domain', 'movie4k.to', 'movie4k.to|movie4k.me|movie4k.tv', 'eq(-1,false)')
+    return oSettingsHandler

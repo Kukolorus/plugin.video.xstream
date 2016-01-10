@@ -9,11 +9,17 @@ class cSettingsHandler():
         pass
 
     def addSeperator(self, parent, label = ''):
-        child = {'attr': {"type": "sep", "label": label}}
+        child = {'attr': {'type': 'sep'}}
+        if label:
+            child['attr']['label'] = label
+        self.__addToParent(self.__data, parent, child)
+
+    def addLabelSeperator(self, parent, label):
+        child = {'attr': {'type': 'lsep', 'label': label}}
         self.__addToParent(self.__data, parent, child)
 
     def addText(self, parent, id, label, default, enable='', option=''):
-        child = {'attr': {"type": "text", "id": id, "label": label, "default": default}}
+        child = {'attr': {'type': 'text', 'id': id, 'label': label, 'default': default}}
         if enable:
             child['attr']['enable'] = enable
         if option:
@@ -23,18 +29,18 @@ class cSettingsHandler():
     def addCategory(self, label, id=None):
         if id is None:
             id = label
-        child = {'attr': {"label": label}, "type": "category", "id": id}
+        child = {'attr': {'label': label}, 'type': 'category', 'id': id}
         self.__data['childs'].append(child)
 
     def addBool(self, parent, id, label, default, enable=''):
-        self.__addSetting("bool", parent, id, label, default, enable)
+        self.__addSetting('bool', parent, id, label, default, enable)
 
     def addNumber(self, parent, id, label, default, enable=''):
-        self.__addSetting("number", parent, id, label, default, enable)
+        self.__addSetting('number', parent, id, label, default, enable)
 
     def addEnum(self, parent, id, label, default, values, enable=''):
         # Make values to list?
-        child = {'attr': {"type": 'enum', "id": id, "label": label, "default": default, "values": values}}
+        child = {'attr': {'type': 'enum', 'id': id, 'label': label, 'default': default, 'values': values}}
         if enable:
             child['attr']['enable'] = enable
         self.__addToParent(self.__data, parent, child)
@@ -42,35 +48,44 @@ class cSettingsHandler():
     def addFolder(self, parent, id, label, default, enable=''):
         self.__addSetting("folder", parent, id, label, default, enable)
 
+    def addLabelEnum(self, parent, id, label, default, values, enable=''):
+        # Make values to list?
+        child = {'attr': {"type": 'labelenum', 'id': id, 'label': label, 'default': default, 'values': values}}
+        if enable:
+            child['attr']['enable'] = enable
+        self.__addToParent(self.__data, parent, child)
+
     def compile(self):
-        logger.info("SettingsDebug: %s" % self.__data)
-        xmlDoc = ElementTree.TreeBuilder()
-        xmlDoc.start('settings', {})
-        self.__generateFile(self.__data, xmlDoc)
-        xmlDoc.end('settings')
-        return self.__prettify(xmlDoc.close())
+        try:
+            xmlDoc = ElementTree.TreeBuilder()
+            xmlDoc.start('settings', {})
+            self.__generateFile(self.__data, xmlDoc)
+            xmlDoc.end('settings')
+            return self.__prettify(xmlDoc.close())
+        except:
+            return None
 
     def __prettify(self, elem):
-        """Return a pretty-printed XML string for the Element.
-        """
         rough_string = ElementTree.tostring(elem, 'utf-8')
         reparsed = minidom.parseString(rough_string)
         return reparsed.toprettyxml(indent="  ")
 
     def __addSetting(self, type, parent, id, label, default, enable):
-        child = {'attr': {"type": type, "id": id, "label": label, "default": default}}
+        child = {'attr': {'type': type, 'id': id, 'label': label, 'default': default}}
         if enable:
             child['attr']['enable'] = enable
         self.__addToParent(self.__data, parent, child)
 
     def __addToParent(self, data, parent, child):
         for entry in data['childs']:
+            id = None
+
             if 'id' in entry:
                 id = entry['id']
             elif 'id' in entry['attr']:
                 id = entry['attr']['id']
 
-            if id == parent:
+            if id and id == parent:
                 if 'childs' not in entry:
                     entry['childs'] = []
                 entry['childs'].append(child)

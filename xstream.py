@@ -50,8 +50,8 @@ def checkSettings():
     oSettingsHandler.addNumber('view_settings', 'episodes-view', 'Episoden-View', '504', 'eq(-1,false)')
 
     # Download settings
-    oSettingsHandler.addCategory('30080', 'download_settings')
-    oSettingsHandler.addSeperator('download_settings', '30024')
+    oSettingsHandler.addCategory('30024', 'download_settings')
+    oSettingsHandler.addSeperator('download_settings', '30080')
     oSettingsHandler.addFolder('download_settings', 'download_folder', '30081', '')
     oSettingsHandler.addSeperator('download_settings', '30070')
     oSettingsHandler.addBool('download_settings', 'jd_enabled', '30071', 'false')
@@ -66,8 +66,12 @@ def checkSettings():
     oSettingsHandler.addText('download_settings', 'pyload_user', '30083', '', '!eq(-3,false)')
     oSettingsHandler.addText('download_settings', 'pyload_passwd', '30084', '', '!eq(-4,false)', 'hidden')
 
+    oSettingsHandler = plugins.get_updater_settings(oSettingsHandler)
 
     xmlString = oSettingsHandler.compile()
+
+    if xmlString is None:
+        return
 
     try:
         f = open(common.settings_file, 'w')
