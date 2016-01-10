@@ -20,7 +20,7 @@ class cPluginHandler:
         logger.info('default sites folder: %s' % self.defaultFolder)
         self.checkForSiteUpdates()
 
-    def getAvailablePlugins(self, active_only = True):
+    def getAvailablePlugins(self):
         pluginDB = self.__getPluginDB()
         # default plugins
         update = False
@@ -51,9 +51,9 @@ class cPluginHandler:
         if update or deletions:
             self.__updateSettings(pluginDB)
             self.__updatePluginDB(pluginDB)
-        return self.getAvailablePluginsFromDB(active_only)
+        return self.getAvailablePluginsFromDB()
 
-    def getAvailablePluginsFromDB(self, active_only = True):
+    def getAvailablePluginsFromDB(self):
         plugins = []
         oConfig = cConfig()
         iconFolder = os.path.join(self.rootFolder, 'resources','art','sites')
@@ -67,9 +67,7 @@ class cPluginHandler:
             else:
                 plugin['icon'] = ''
             # existieren zu diesem plugin die an/aus settings
-            if active_only and oConfig.getSetting(pluginSettingsName) == 'true':
-                plugins.append(plugin)
-            elif not active_only:
+            if oConfig.getSetting(pluginSettingsName) == 'true':
                 plugins.append(plugin)
         return plugins
 
@@ -84,7 +82,7 @@ class cPluginHandler:
             oSettingsHandler.addLabelSeperator('site_settings', plugin['name'])
             oSettingsHandler.addBool('site_settings', 'plugin_' + pluginID, plugin['name'], 'false')
             try:
-                pluginEntry = __import__(plugin['id'], globals(), locals())
+                pluginEntry = __import__(pluginID, globals(), locals())
                 function = getattr(pluginEntry, 'getSettings')
                 oSettingsHandler = function(oSettingsHandler)
             except:
