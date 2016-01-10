@@ -15,15 +15,16 @@ import xml
 
 # Main starting function
 def run():
-    testConfig()
+    checkSettings()
     parseUrl()
 
-def testConfig():
+def checkSettings():
     try:
         os.makedirs(os.path.dirname(common.settings_file))
     except OSError:
         pass
 
+    # Main settings
     oSettingsHandler = cSettingsHandler()
     oSettingsHandler.addCategory('30021', 'main_settings')
     oSettingsHandler.addBool('main_settings', 'autoPlay', '30005', 'false')
@@ -35,10 +36,36 @@ def testConfig():
     oSettingsHandler.addBool('main_settings', 'metaOverwrite', '30008', 'false', 'eq(-1,false)')
     oSettingsHandler.addNumber('main_settings', 'cacheTime', '30006', '600')
     oSettingsHandler.addBool('main_settings', 'showAdult', '30003', 'false')
-    oSettingsHandler.addSeperator('main_settings')
 
+    # Plugin sites
     plugins = cPluginHandler()
     oSettingsHandler = plugins.get_settings(oSettingsHandler)
+
+    # Automatic views
+    oSettingsHandler.addCategory('Views', 'view_settings')
+    oSettingsHandler.addBool('view_settings', 'auto_view', 'automatische Views aktivieren', 'false')
+    oSettingsHandler.addNumber('view_settings', 'movies-view', 'Film-View', '503', 'eq(-1,false)')
+    oSettingsHandler.addNumber('view_settings', 'tvshow-view', 'Serien-View', '503', 'eq(-1,false)')
+    oSettingsHandler.addNumber('view_settings', 'seasons-view', 'Staffel-View', '504', 'eq(-1,false)')
+    oSettingsHandler.addNumber('view_settings', 'episodes-view', 'Episoden-View', '504', 'eq(-1,false)')
+
+    # Download settings
+    oSettingsHandler.addCategory('30080', 'download_settings')
+    oSettingsHandler.addSeperator('download_settings', '30024')
+    oSettingsHandler.addFolder('download_settings', 'download_folder', '30081', '')
+    oSettingsHandler.addSeperator('download_settings', '30070')
+    oSettingsHandler.addBool('download_settings', 'jd_enabled', '30071', 'false')
+    oSettingsHandler.addText('download_settings', 'jd_host', '30072', '127.0.0.1', '!eq(-1,false)')
+    oSettingsHandler.addText('download_settings', 'jd_port', '30073', '10025', '!eq(-2,false)')
+    oSettingsHandler.addBool('download_settings', 'jd_automatic_start', '30074', 'true', '!eq(-3,false)')
+    oSettingsHandler.addBool('download_settings', 'jd_grabber', '30075', 'false', '!eq(-4,false)')
+    oSettingsHandler.addSeperator('download_settings')
+    oSettingsHandler.addBool('download_settings', 'pyload_enabled', '30082', 'false')
+    oSettingsHandler.addText('download_settings', 'pyload_host', '30072', '127.0.0.1', '!eq(-1,false)')
+    oSettingsHandler.addText('download_settings', 'pyload_port', '30073', '8000', '!eq(-2,false)')
+    oSettingsHandler.addText('download_settings', 'pyload_user', '30083', '', '!eq(-3,false)')
+    oSettingsHandler.addText('download_settings', 'pyload_passwd', '30084', '', '!eq(-4,false)', 'hidden')
+
 
     xmlString = oSettingsHandler.compile()
 
@@ -118,7 +145,7 @@ def updateMeta(params):
         items = []
         for item in foundInfo:
             if mediaType == 'movie':
-                items.append(str(item['title'].encode('utf-8'))+' ('+str(item['year'])+')')                   
+                items.append(str(item['title'].encode('utf-8'))+' ('+str(item['year'])+')')
             elif mediaType == 'tvshow':
                 if len(item)>2:items.append(str(item[1])+' ('+str(item[3])+')')
                 else: items.append(str(item[1]))
@@ -136,7 +163,7 @@ def updateMeta(params):
         year = ''
     if mediaType == 'movie':
         meta.update_meta(mediaType, name, imdbID, new_imdb_id=str(item['imdb_id']), new_tmdb_id=str(item['tmdb_id']), year=year)
-    elif mediaType == 'tvshow': 
+    elif mediaType == 'tvshow':
         if params.exist('season'):
             season = params.getValue('season')
             meta.update_season(name, imdbID, season)
@@ -147,7 +174,7 @@ def updateMeta(params):
         elif season:
             meta.update_season(name, imdbID, season)
         else:
-            meta.update_meta(mediaType, name, imdbID, new_imdb_id=str(item[2]), new_tmdb_id=str(item[0]), year=year) 
+            meta.update_meta(mediaType, name, imdbID, new_imdb_id=str(item[2]), new_tmdb_id=str(item[0]), year=year)
     xbmc.executebuiltin("XBMC.Container.Refresh")
     return
 
@@ -168,10 +195,10 @@ def parseUrl():
         changeWatched(params)
         return
     elif sFunction == 'updateMeta':
-        updateMeta(params) 
+        updateMeta(params)
         return
     elif sFunction == 'searchAlter':
-        searchAlter(params) 
+        searchAlter(params)
         return
   else:
     sFunction = 'load'
@@ -180,46 +207,46 @@ def parseUrl():
   if params.exist('site'):
     sSiteName = params.getValue('site')
     logger.info (params.getAllParameters())
-    
+
     if params.exist('playMode'):
         from resources.lib.gui.hoster import cHosterGui
         url = False
         playMode = params.getValue('playMode')
         isHoster = params.getValue('isHoster')
         url = params.getValue('url')
-        manual = params.exist('manual')  
-           
+        manual = params.exist('manual')
+
         if cConfig().getSetting('autoPlay')=='true' and playMode != 'jd' and playMode != 'pyload' and not manual:
             cHosterGui().streamAuto(playMode, sSiteName, sFunction)
-        else:        
+        else:
             cHosterGui().stream(playMode, sSiteName, sFunction, url)
         return
-        
-    else:    
+
+    else:
         logger.info("Call function '%s' from '%s'" % (sFunction, sSiteName))
         # If the hoster gui is called, run the function on it and return
         if sSiteName == 'cHosterGui':
             showHosterGui(sFunction)
-            return  
-        # If global search is called  
+            return
+        # If global search is called
         elif sSiteName == 'globalSearch':
             searchGlobal()
-            return    
+            return
         elif sSiteName == 'favGui':
             showFavGui(sFunction)
-            return 
-        # If addon settings are called  
+            return
+        # If addon settings are called
         elif sSiteName == 'xStream':
             oGui = cGui()
             oGui.openSettings()
             oGui.updateDirectory()
             return
-        # If the urlresolver settings are called  
+        # If the urlresolver settings are called
         elif sSiteName == 'urlresolver':
             import urlresolver
             urlresolver.display_settings()
             return
-        # If metahandler settings are called    
+        # If metahandler settings are called
         elif sSiteName == 'metahandler':
             import metahandler
             metahandler.display_settings()
@@ -229,13 +256,13 @@ def parseUrl():
             plugin = __import__(sSiteName, globals(), locals())
             function = getattr(plugin, sFunction)
             function()
-    
+
   else:
       xbmc.executebuiltin('XBMC.RunPlugin(%s?function=clearCache)' % sys.argv[0])
       # As a default if no site was specified, we run the default starting gui with all plugins
       showMainMenu(sFunction)
 
-def showMainMenu(sFunction):    
+def showMainMenu(sFunction):
     oGui = cGui()
     oPluginHandler = cPluginHandler()
     aPlugins = oPluginHandler.getAvailablePlugins()
@@ -254,7 +281,7 @@ def showMainMenu(sFunction):
         if aPlugin['icon'] != '':
             oGuiElement.setThumbnail(aPlugin['icon'])
         oGui.addFolder(oGuiElement)
-      
+
       # Create a gui element for global search
       oGuiElement = cGuiElement()
       oGuiElement.setTitle("Globale Suche")
@@ -262,7 +289,7 @@ def showMainMenu(sFunction):
       oGuiElement.setFunction("globalSearch")
       #oGuiElement.setThumbnail("DefaultAddonService.png")
       oGui.addFolder(oGuiElement)
-        
+
       # Create a gui element for favorites
       #oGuiElement = cGuiElement()
       #oGuiElement.setTitle("Favorites")
@@ -278,7 +305,7 @@ def showMainMenu(sFunction):
       oGuiElement.setFunction("display_settings")
       oGuiElement.setThumbnail("DefaultAddonService.png")
       oGui.addFolder(oGuiElement)
-      
+
       # Create a gui element for urlresolver settings
       oGuiElement = cGuiElement()
       oGuiElement.setTitle("Resolver Settings")
@@ -286,7 +313,7 @@ def showMainMenu(sFunction):
       oGuiElement.setFunction("display_settings")
       oGuiElement.setThumbnail("DefaultAddonService.png")
       oGui.addFolder(oGuiElement)
-      
+
       if cConfig().getSetting('metahandler')=='true':
       # Create a gui element for metahandler settings
           oGuiElement = cGuiElement()
@@ -303,7 +330,7 @@ def showHosterGui(sFunction):
     function = getattr(oHosterGui, sFunction)
     function()
     return True
-  
+
 #def showFavGui(functionName):
     #from resources.lib.gui.favorites import FavGui
     #oFavGui = FavGui()
@@ -330,7 +357,7 @@ def searchGlobal():
             t = threading.Thread(target=_pluginSearch, args=(pluginEntry,sSearchText,oGui))
             threads += [t]
             t.start()
-        for t in threads: 
+        for t in threads:
             t.join()
         dialog.close()
         oGui.setView()
@@ -357,7 +384,7 @@ def searchAlter(params):
         t = threading.Thread(target=_pluginSearch, args=(pluginEntry,searchTitle, oGui))
         threads += [t]
         t.start()
-    for t in threads: 
+    for t in threads:
         t.join()
     #check results, put this to the threaded part, too
     dialog.close()
