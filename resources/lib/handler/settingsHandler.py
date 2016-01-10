@@ -14,9 +14,9 @@ class cSettingsHandler():
 
     def addText(self, parent, id, label, default, enable='', option=''):
         child = {'attr': {"type": "text", "id": id, "label": label, "default": default}}
-        if enable != '':
+        if enable:
             child['attr']['enable'] = enable
-        if option != '':
+        if option:
             child['attr']['option'] = option
         self.__addToParent(self.__data, parent, child)
 
@@ -35,7 +35,7 @@ class cSettingsHandler():
     def addEnum(self, parent, id, label, default, values, enable=''):
         # Make values to list?
         child = {'attr': {"type": 'enum', "id": id, "label": label, "default": default, "values": values}}
-        if enable != '':
+        if enable:
             child['attr']['enable'] = enable
         self.__addToParent(self.__data, parent, child)
 
@@ -56,7 +56,7 @@ class cSettingsHandler():
 
     def __addSetting(self, type, parent, id, label, default, enable):
         child = {'attr': {"type": type, "id": id, "label": label, "default": default}}
-        if enable != '':
+        if enable:
             child['attr']['enable'] = enable
         self.__addToParent(self.__data, parent, child)
 
@@ -71,24 +71,22 @@ class cSettingsHandler():
                 if 'childs' not in entry:
                     entry['childs'] = []
                 entry['childs'].append(child)
-            else:
-                if 'childs' in entry:
-                    self.__addToParent(entry, parent, child)
+            elif 'childs' in entry:
+                self.__addToParent(entry, parent, child)
 
     def __generateFile(self, data, xmlDoc):
-        if 'childs' in data:
-            for entry in data['childs']:
-                # ToDo: Handle special cases
-                if 'type' in entry:
-                    type = entry['type']
-                elif 'type' in entry['attr']:
-                    type = entry['attr']['type']
+        if 'childs' not in data: return
+        for entry in data['childs']:
+            # ToDo: Handle special cases
+            if 'type' in entry:
+                type = entry['type']
+            elif 'type' in entry['attr']:
+                type = entry['attr']['type']
 
-                if type == 'category':
-                    xmlDoc.start('category', entry['attr'])
-                    self.__generateFile(entry, xmlDoc)
-                    xmlDoc.end('category')
-                else:
-                    xmlDoc.start('setting', entry['attr'])
-                    xmlDoc.end('setting')
-        return xmlDoc
+            if type == 'category':
+                xmlDoc.start('category', entry['attr'])
+                self.__generateFile(entry, xmlDoc)
+                xmlDoc.end('category')
+            else:
+                xmlDoc.start('setting', entry['attr'])
+                xmlDoc.end('setting')
