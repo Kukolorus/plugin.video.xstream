@@ -73,18 +73,19 @@ class cPluginHandler:
                 plugins.append(plugin)
         return plugins
 
-    def get_settings(self, oSettingsHandler):
-        aPlugins = []
-        aPlugins = self.getAvailablePlugins(False)
+    def getSettings(self, oSettingsHandler):
+        self.getAvailablePlugins()
+        pluginDB = self.__getPluginDB()
 
         oSettingsHandler.addCategory('30022', 'site_settings')
 
-        for pluginEntry in aPlugins:
-            oSettingsHandler.addLSeperator('site_settings', pluginEntry['name'])
-            oSettingsHandler.addBool('site_settings', pluginEntry['id'], pluginEntry['name'], 'false')
+        for pluginID in pluginDB:
+            plugin = pluginDB[pluginID]
+            oSettingsHandler.addLabelSeperator('site_settings', plugin['name'])
+            oSettingsHandler.addBool('site_settings', 'plugin_' + pluginID, plugin['name'], 'false')
             try:
-                plugin = __import__(pluginEntry['id'], globals(), locals())
-                function = getattr(plugin, 'get_settings')
+                pluginEntry = __import__(plugin['id'], globals(), locals())
+                function = getattr(pluginEntry, 'getSettings')
                 oSettingsHandler = function(oSettingsHandler)
             except:
                 pass
