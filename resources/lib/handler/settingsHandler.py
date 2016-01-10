@@ -1,3 +1,7 @@
+from resources.lib import logger
+from xml.etree import ElementTree
+from xml.dom import minidom
+
 class cSettingsHandler():
     def __init__(self):
         self.__data = dict()
@@ -5,13 +9,21 @@ class cSettingsHandler():
         pass
 
     def addSeperator(self, parent):
-        child = {"type": "sep"}
+        child = {'attr': {"type": "sep"}}
+        self.__addToParent(self.__data, parent, child)
+
+    def addText(self, parent, id, label, default, enable='', option=''):
+        child = {'attr': {"type": "text", "id": id, "label": label, "default": default}}
+        if enable != '':
+            child['attr']['enable'] = enable
+        if option != '':
+            child['attr']['option'] = option
         self.__addToParent(self.__data, parent, child)
 
     def addCategory(self, label, id=None):
         if id is None:
             id = label
-        child = {"type": "category", "id": id, "label": label}
+        child = {'attr': {"label": label}, "type": "category", "id": id}
         self.__data['childs'].append(child)
 
     def addBool(self, parent, id, label, default, enable=''):
@@ -22,30 +34,40 @@ class cSettingsHandler():
 
     def addEnum(self, parent, id, label, default, values, enable=''):
         # Make values to list?
-        child = {"type": type, "id": id, "label": label, "default": default, "values": values}
+        child = {'attr': {"type": 'enum', "id": id, "label": label, "default": default, "values": values}}
         if enable != '':
-            child['enable'] = 'enable="%s"' % enable
-        else:
-            child['enable'] = ''
+            child['attr']['enable'] = enable
         self.__addToParent(self.__data, parent, child)
 
     def compile(self):
-        xml = '<settings>\n'
-        xml += self.__generateFile(self.__data)
-        xml += '</settings>'
-        return xml
+        logger.info("SettingsDebug: %s" % self.__data)
+        xmlDoc = ElementTree.TreeBuilder()
+        xmlDoc.start('settings', {})
+        self.__generateFile(self.__data, xmlDoc)
+        xmlDoc.end('settings')
+        return self.__prettify(xmlDoc.close())
+
+    def __prettify(self, elem):
+        """Return a pretty-printed XML string for the Element.
+        """
+        rough_string = ElementTree.tostring(elem, 'utf-8')
+        reparsed = minidom.parseString(rough_string)
+        return reparsed.toprettyxml(indent="  ")
 
     def __addSetting(self, type, parent, id, label, default, enable):
-        child = {"type": type, "id": id, "label": label, "default": default}
+        child = {'attr': {"type": type, "id": id, "label": label, "default": default}}
         if enable != '':
-            child['enable'] = 'enable="%s"' % enable
-        else:
-            child['enable'] = ''
+            child['attr']['enable'] = enable
         self.__addToParent(self.__data, parent, child)
 
     def __addToParent(self, data, parent, child):
         for entry in data['childs']:
-            if entry['id'] == parent:
+            if 'id' in entry:
+                id = entry['id']
+            elif 'id' in entry['attr']:
+                id = entry['attr']['id']
+
+            if id == parent:
                 if 'childs' not in entry:
                     entry['childs'] = []
                 entry['childs'].append(child)
@@ -53,22 +75,20 @@ class cSettingsHandler():
                 if 'childs' in entry:
                     self.__addToParent(entry, parent, child)
 
-    def __generateFile(self, data, indent=1):
-        xml = ''
+    def __generateFile(self, data, xmlDoc):
         if 'childs' in data:
             for entry in data['childs']:
                 # ToDo: Handle special cases
-                if entry['type'] == 'category':
-                    xml += ('\t' * indent) + '<category label="%s">\n' % entry['label']
-                    xml += self.__generateFile(entry, indent + 1)
-                    xml += ('\t' * indent) + '</category>\n'
-                elif entry['type'] == 'enum':
-                    xml += (
-                           '\t' * indent) + '<setting default="%s" %s id="%s" label="%s" type="%s" values="%s" />\n' % (
-                    entry['default'], entry['enable'], entry['id'], entry['label'], entry['type'], entry['values'])
-                elif entry['type'] == 'sep':
-                    xml += ('\t' * indent) + '<setting type="sep" />\n'
+                if 'type' in entry:
+                    type = entry['type']
+                elif 'type' in entry['attr']:
+                    type = entry['attr']['type']
+
+                if type == 'category':
+                    xmlDoc.start('category', entry['attr'])
+                    self.__generateFile(entry, xmlDoc)
+                    xmlDoc.end('category')
                 else:
-                    xml += ('\t' * indent) + '<setting default="%s" %s id="%s" label="%s" type="%s" />\n' % (
-                    entry['default'], entry['enable'], entry['id'], entry['label'], entry['type'])
-        return xml
+                    xmlDoc.start('setting', entry['attr'])
+                    xmlDoc.end('setting')
+        return xmlDoc

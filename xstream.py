@@ -11,6 +11,7 @@ import xbmc
 import xbmcgui
 import sys
 import os
+import xml
 
 # Main starting function
 def run():
@@ -35,11 +36,15 @@ def testConfig():
     oSettingsHandler.addNumber('main_settings', 'cacheTime', '30006', '600')
     oSettingsHandler.addBool('main_settings', 'showAdult', '30003', 'false')
     oSettingsHandler.addSeperator('main_settings')
-    xml = oSettingsHandler.compile()
+
+    plugins = cPluginHandler()
+    oSettingsHandler = plugins.get_settings(oSettingsHandler)
+
+    xmlString = oSettingsHandler.compile()
 
     try:
         f = open(common.settings_file, 'w')
-        f.write(xml)
+        f.write(xmlString)
         f.close()
     except:
         pass

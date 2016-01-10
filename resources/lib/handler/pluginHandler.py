@@ -71,6 +71,23 @@ class cPluginHandler:
                 plugins.append(plugin)
         return plugins
 
+    def get_settings(self, oSettingsHandler):
+        aPlugins = []
+        aPlugins = self.getAvailablePlugins()
+
+        oSettingsHandler.addCategory('30022', 'site_settings')
+
+        for pluginEntry in aPlugins:
+            oSettingsHandler.addBool('site_settings', 'enable_%s' % pluginEntry['id'], '???', 'false')
+            try:
+                plugin = __import__(pluginEntry['id'], globals(), locals())
+                function = getattr(plugin, 'get_settings')
+                oSettingsHandler = function(oSettingsHandler)
+            except:
+                pass
+
+        return oSettingsHandler
+
     def __updatePluginDB(self, data):
         file = open(self.pluginDBFile, 'w')
         json.dump(data,file)
@@ -167,11 +184,10 @@ class cPluginHandler:
 
     def checkForSiteUpdates(self):
         # ToDo: Add settings for UpdateCheck (Enabled/Disabled, Trusted Hosts,Download beta versions,...)
-        checkForUpdates = False
-        beta = True
-
-        if not checkForUpdates:
+        if not cConfig().getSetting('auto_update'):
             return
+
+        beta = cConfig().getSetting('auto_update_beta')
 
         addon_version = LooseVersion(common.addon.getAddonInfo('version'))
 
