@@ -1,18 +1,48 @@
 ﻿# -*- coding: utf-8 -*-
 from resources.lib.handler.pluginHandler import cPluginHandler
 from resources.lib.handler.ParameterHandler import ParameterHandler
+from resources.lib.handler.settingsHandler import cSettingsHandler
 from resources.lib.gui.gui import cGui
 from resources.lib.gui.guiElement import cGuiElement
 from resources.lib.config import cConfig
 from resources.lib import logger
+from resources.lib import common
 import xbmc
 import xbmcgui
 import sys
+import os
 
 # Main starting function
 def run():
+    testConfig()
     parseUrl()
 
+def testConfig():
+    try:
+        os.makedirs(os.path.dirname(common.settings_file))
+    except OSError:
+        pass
+
+    oSettingsHandler = cSettingsHandler()
+    oSettingsHandler.addCategory('30021', 'main_settings')
+    oSettingsHandler.addBool('main_settings', 'autoPlay', '30005', 'false')
+    oSettingsHandler.addNumber('main_settings', 'maxHoster', 'maximale Laenge Hosterliste', '100')
+    oSettingsHandler.addBool('main_settings', 'hosterListFolder', '30007', 'false', 'eq(-2,false)')
+    oSettingsHandler.addBool('main_settings', 'presortHoster', '30009', 'true', 'eq(-3,false)')
+    oSettingsHandler.addEnum('main_settings', 'prefLanguage', '30002', '2', 'ger|eng|all')
+    oSettingsHandler.addBool('main_settings', 'metahandler', '30004', 'false')
+    oSettingsHandler.addBool('main_settings', 'metaOverwrite', '30008', 'false', 'eq(-1,false)')
+    oSettingsHandler.addNumber('main_settings', 'cacheTime', '30006', '600')
+    oSettingsHandler.addBool('main_settings', 'showAdult', '30003', 'false')
+    oSettingsHandler.addSeperator('main_settings')
+    xml = oSettingsHandler.compile()
+
+    try:
+        f = open(common.settings_file, 'w')
+        f.write(xml)
+        f.close()
+    except:
+        pass
 
 def changeWatched(params):
     if not cConfig().getSetting('metahandler')=='true':
