@@ -51,9 +51,9 @@ def checkSettings():
 
     # Download settings
     oSettingsHandler.addCategory('30024', 'download_settings')
-    oSettingsHandler.addSeperator('download_settings', '30080')
+    oSettingsHandler.addLabelSeperator('download_settings', '30080')
     oSettingsHandler.addFolder('download_settings', 'download_folder', '30081', '')
-    oSettingsHandler.addSeperator('download_settings', '30070')
+    oSettingsHandler.addLabelSeperator('download_settings', '30070')
     oSettingsHandler.addBool('download_settings', 'jd_enabled', '30071', 'false')
     oSettingsHandler.addText('download_settings', 'jd_host', '30072', '127.0.0.1', enable='!eq(-1,false)')
     oSettingsHandler.addText('download_settings', 'jd_port', '30073', '10025', 'enable=!eq(-2,false)')
