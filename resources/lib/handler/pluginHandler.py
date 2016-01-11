@@ -186,10 +186,10 @@ class cPluginHandler:
             pass
         return pluginData
 
-    def get_updater_settings(self, oSettingsHandler):
+    def getUpdaterSettings(self, oSettingsHandler):
         oSettingsHandler.addCategory('Site Updater', 'updater_settings')
         oSettingsHandler.addBool('updater_settings', 'enable_site_updater', 'Enable Site-Updater', 'false')
-        oSettingsHandler.addBool('updater_settings', 'enable_site_updater_beta', 'Include Beta releases', 'false', enable='eq(-1,false)')
+        oSettingsHandler.addBool('updater_settings', 'enable_site_updater_beta', 'Include Beta releases', 'false', enable='!eq(-1,false)')
 
         # This or a static version?
         # If this, add file generation after change
