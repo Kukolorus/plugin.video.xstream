@@ -79,12 +79,11 @@ class cPluginHandler:
 
         for pluginID in pluginDB:
             plugin = pluginDB[pluginID]
-            oSettingsHandler.addLabelSeperator('site_settings', plugin['name'])
-            oSettingsHandler.addBool('site_settings', 'plugin_' + pluginID, plugin['name'], 'false')
             try:
                 pluginEntry = __import__(pluginID, globals(), locals())
-                function = getattr(pluginEntry, 'getSettings')
-                oSettingsHandler = function(oSettingsHandler)
+                oSettingsHandler.addLabelSeperator('site_settings', pluginEntry.SITE_NAME)
+                oSettingsHandler.addBool('site_settings', 'plugin_' + pluginID, pluginEntry.SITE_NAME, 'false')
+                oSettingsHandler.parseSiteSettings(pluginID, pluginEntry.SITE_SETTINGS)
             except:
                 pass
 
@@ -190,7 +189,7 @@ class cPluginHandler:
     def get_updater_settings(self, oSettingsHandler):
         oSettingsHandler.addCategory('Site Updater', 'updater_settings')
         oSettingsHandler.addBool('updater_settings', 'enable_site_updater', 'Enable Site-Updater', 'false')
-        oSettingsHandler.addBool('updater_settings', 'enable_site_updater_beta', 'Include Beta releases', 'false', 'eq(-1,false)')
+        oSettingsHandler.addBool('updater_settings', 'enable_site_updater_beta', 'Include Beta releases', 'false', enable='eq(-1,false)')
 
         # This or a static version?
         # If this, add file generation after change

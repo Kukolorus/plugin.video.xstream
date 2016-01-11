@@ -15,7 +15,7 @@ from resources.lib import jsunprotect
 SITE_IDENTIFIER = 'kinox_to'
 SITE_NAME = 'Kinox.to'
 SITE_ICON = 'kinox.png'
-SITE_SETTINGS = '<setting default="kinox.to" enable="!eq(-1,false)" id="kinox_to-domain" label="Kinox domain" type="labelenum" values="kinox.to|kinox.me|kinox.tv" />'
+SITE_SETTINGS = [{'id':'domain', 'label': 'Kinox domain', 'type': 'labelenum', 'enable': '!eq(-1,false)', 'values': 'kinox.to|kinox.me|kinox.tv', 'default': 'kinox.to'}]
 oConfig = cConfig()
 domain = oConfig.getSetting('kinox_to-domain')
 
@@ -887,7 +887,3 @@ def __getDetails(sHtmlContent):
         aDetails['genre'] = aResult[1][0][3]
         aDetails['playcount'] = oParser.getNumberFromString(aResult[1][0][4])
     return aDetails
-
-def getSettings(oSettingsHandler):
-    oSettingsHandler.addLabelEnum('site_settings', '%s-domain' % SITE_IDENTIFIER, 'Kinox domain', 'kinox.to', 'kinox.to|kinox.me|kinox.tv', 'eq(-1,false)')
-    return oSettingsHandler

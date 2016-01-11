@@ -12,8 +12,7 @@ import hashlib
 SITE_IDENTIFIER = 'gstream_in'
 SITE_NAME = 'G-Stream'
 SITE_ICON = 'gstream.png'
-SITE_SETTINGS ='<setting default="" id="gstream_in-username" label="Benutzername" type="text"/>+\
-                <setting default="" id="gstream_in-password" label="Passwort" type="text" option="hidden"/>'
+SITE_SETTINGS = [{'id':'username', 'label': 'Benutzername', 'type': 'text', 'enable': '!eq(-1,false)'}, {'id':'password', 'label': 'Passwort', 'type': 'text', 'option': 'hidden', 'enable': '!eq(-2,false)'}]
 
 URL_MAIN = 'http://gstream.to'
 URL_LOGIN = URL_MAIN + '/login.php'
@@ -390,8 +389,3 @@ def getHosterUrl(sUrl = False):
     result['resolved'] = False
     results.append(result)
     return results
-
-def getSettings(oSettingsHandler):
-    oSettingsHandler.addText('site_settings', '%s-username' % SITE_IDENTIFIER, 'Username', '', 'eq(-1,false)')
-    oSettingsHandler.addText('site_settings', '%s-password' % SITE_IDENTIFIER, 'Password', '', 'eq(-2,false)', 'hidden')
-    return oSettingsHandler

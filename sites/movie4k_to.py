@@ -14,7 +14,7 @@ from resources.lib import jsunprotect
 SITE_IDENTIFIER = 'movie4k_to'
 SITE_NAME = 'Movie4k.to'
 SITE_ICON = 'movie2k.jpg'
-SITE_SETTINGS = '<setting default="movie4k.to" enable="!eq(-1,false)" id="movie4k_to-domain" label="Movie4k domain" type="labelenum" values="movie4k.to|movie4k.me|movie4k.tv" />'
+SITE_SETTINGS = [{'id':'domain', 'label': 'Movie4k domain', 'type': 'labelenum', 'enable': '!eq(-1,false)', 'values': 'movie4k.to|movie4k.me|movie4k.tv', 'default': 'movie4k.to'}]
 oConfig = cConfig()
 DOMAIN = oConfig.getSetting('movie4k_to-domain')
 ####
@@ -679,7 +679,3 @@ def __createMainMenuItem(oGui, sTitle, sUrl, sFunction):
     if (sUrl != ''):
         oOutputParameterHandler.setParam('sUrl', sUrl)
     oGui.addFolder(oGuiElement, oOutputParameterHandler)
-
-def getSettings(oSettingsHandler):
-    oSettingsHandler.addLabelEnum('site_settings', '%s-domain' % SITE_IDENTIFIER, 'Movie4k domain', 'movie4k.to', 'movie4k.to|movie4k.me|movie4k.tv', 'eq(-1,false)')
-    return oSettingsHandler
