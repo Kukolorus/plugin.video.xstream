@@ -40,8 +40,8 @@ Wird die aktuelle 2.1.16 Beta installiert, ist es _vorher_ notwendig das script.
 
 ### b. Gibt es für mich Rechtliche Konsequenzen?
 Nein, durch unser Addon ist es ihnen möglich aus Kodi über dieses Addon einfach von den oben genannten Seiten zu streamen. Das bloße Streaming hat in Deutschland (Momentan) keine Rechtlichen Konsequenzen. Die meisten Streaming Seiten loggen ohnehin keine IP-Adressen usw. Über genaueres informieren sie sich bitte indem sie auf den einzelnen Seiten nachforschen, hier ist nochmal ein Video über das Thema Streaming verlinkt. xStream an sich bringt, allgemein keine Konsequenzen mit sich, wir sind nur die bloße Brücke.
-* https://www.youtube.com/watch?v=cDmvhJrLkmM
 
+[![Nutzerfragen: Legalität von Streaming, Arbeitszeiten und Bild.de | Rechtsanwalt Christian Solmecke](http://img.youtube.com/vi/cDmvhJrLkmM/0.jpg)](http://www.youtube.com/watch?v=cDmvhJrLkmM)
 
 ### c. Welche Seiten sind im Addon enthalten?
 Kinox.to, Movie4k.to, DDL.me, hdFilme.tv, BS.to, SeriesEver.to, Szene-Streams.com, Filmpalast.to, sind die Seiten die momentan enthalten sind.
