@@ -1,4 +1,22 @@
 # FAQ xStream
+- [FAQ xStream](#)
+    - [1. Was ist xStream?](#)
+        - [a. Wo bekomme ich xStream?](#)
+        - [b. Gibt es für mich Rechtliche Konsequenzen?](#)
+        - [c. Welche Seiten sind im Addon enthalten?](#)
+    - [2. Konfigurieren von xStream](#)
+        - [a. Bestimmte Seiten an/ausschalten?](#)
+        - [b. Was stelle ich am besten in den Settings ein?](#)
+        - [c. Manuelle oder automatische Hosterwahl?](#)
+    - [3. Fehler!](#)
+        - [a. Fehler bei der Installation](#)
+        - [b. Fehler bei der Globalen Suche](#)
+        - [c. Fehler beim Öffnen einzelner Seiten im Addon](#)
+        - [d. Fehlermeldung bei den Hostern](#)
+    - [4. Kodi LOG-File](#)
+        - [a. Was ist ein Log-File?](#)
+        - [b. Wo finde ich das Log File/die Log Datei?](#)
+        - [c. Log Erstellen & Hochladen mittels Addon](#)
 
 ## 1. Was ist xStream?
 xStream ist ein Video Addon für das Media-Center Kodi. Es beinhaltet mehrere Streaming-Seiten in einem Plugin, mit welchem man Filme und Serien Streamen kann, wir bilden praktisch die Brücke.
