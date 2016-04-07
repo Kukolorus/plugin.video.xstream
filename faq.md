@@ -18,16 +18,16 @@
     - [c. Log Erstellen & Hochladen mittels Addon](#c-log-erstellen--hochladen-mittels-addon)
 
 ## 1. Was ist xStream?
-xStream ist ein Video Addon für das Media-Center Kodi. Es beinhaltet mehrere Streaming-Seiten in einem Plugin, mit welchem man Filme und Serien Streamen kann, wir bilden praktisch die Brücke.
+xStream ist ein Video Addon für die Media-Center-Software Kodi. Mit xStream ist es möglich über eine simple Benutzeroberfläche mehrere Streaming-Seiten, mit welchem man Filme und Serien Streamen kann, zu benutzen.
 
 ### a. Wo bekomme ich xStream?
-Sie können entweder von einer Downloadquelle xStream herunterladen (dann wird aber nicht über Updates informiert), oder das xStream Repo installieren. Dieses ist momentan hier verfügbar:
+Sie können entweder das Plugin direkt herunterladen (wobei Sie keine Updates erhalten), oder es über der xStream Repository installieren (empfohlen). Diese ist momentan hier verfügbar:
 * https://github.com/Lynx187/xStreamRepo/archive/master.zip
 
-Alternativ Download des Repos:
+Alternativer Download der Repository:
 * https://superrepo.org/kodi/addon/repository.xstream/
 
-Zusätzlich können sie auch die neuste Version von xStream benutzen, wenn sie die Nightly bzw. Beta Version herunterladen.
+Zusätzlich können sie auch die neuste Entwicklerversion von xStream benutzen, wenn sie die Nightly bzw. Beta Version herunterladen.
 * Beta:
    https://github.com/StoneOffStones/plugin.video.xstream/tree/beta
 * Nightly:
@@ -36,7 +36,7 @@ Zusätzlich können sie auch die neuste Version von xStream benutzen, wenn sie d
 Wird die aktuelle 2.1.16 Beta installiert, ist es _vorher_ notwendig das script.modul Cryptopy  zu installieren:
 * https://www.github.com/StoneOffStones/script.modul.cryptopy/archive/xstream.zip
 
-**ACHTUNG!** *Für die Beta Version gibt es keinen Fehler-Support, für die Nightly erst recht nicht! Die Beta ist keine Finale Version und die Nightly ein Experimenteller Stand in denen getestet wird! Support gibt es nur für die Finale xStream Version!*
+**ACHTUNG!** *Für die Beta und Nightly Versionen gelten als Experimentell und wird nicht offiziell unterstützt.*
 
 ### b. Gibt es für mich Rechtliche Konsequenzen?
 Nein, durch unser Addon ist es ihnen möglich aus Kodi über dieses Addon einfach von den oben genannten Seiten zu streamen. Das bloße Streaming hat in Deutschland (Momentan) keine Rechtlichen Konsequenzen. Die meisten Streaming Seiten loggen ohnehin keine IP-Adressen usw. Über genaueres informieren sie sich bitte indem sie auf den einzelnen Seiten nachforschen, hier ist nochmal ein Video über das Thema Streaming verlinkt. xStream an sich bringt, allgemein keine Konsequenzen mit sich, wir sind nur die bloße Brücke.
