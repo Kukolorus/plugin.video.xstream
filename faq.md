@@ -114,16 +114,10 @@ Im Folgenden werden bekannte Ordnerstrukturen der jeweiligen Betriebssysteme auf
     - `/Users/<your_user_name>/Library/Application Support/Kodi/userdata`
 - iOS
     - `/private/var/mobile/Library/Preferences`
-- Linux
+- Linux, OpenElec, Raspberry Pi 1-3
     - `$HOME/.kodi/temp/`
     - `$HOME/.kodi/userdata/temp/xbmc.log`
     - `$HOME/.kodi/userdata`
-- OpenElec
-    - `$HOME/.xbmc/userdata/temp/xbmc.log`
-    - `$HOME/.kodi/temp/`
-- Raspberry Pi 1-3
-    - `/home/pi/.kodi/temp/`
-    - `/home/pi/.xbmc/temp/xbmc.log`
 - Android
     - `/android/data/org.xbmc.Kodi/files/.kodi/temp`
     - `data/data/org.xbmc.Kodi/cache/temp`
