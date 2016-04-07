@@ -5,23 +5,25 @@ xStream ist ein Video Addon für das Media-Center Kodi. Es beinhaltet mehrere St
 
 ### a. Wo bekomme ich xStream?
 Sie können entweder von einer Downloadquelle xStream herunterladen (dann wird aber nicht über Updates informiert), oder das xStream Repo installieren. Dieses ist momentan hier verfügbar:
-https://github.com/Lynx187/xStreamRepo/archive/master.zip
+* https://github.com/Lynx187/xStreamRepo/archive/master.zip
 
 Alternativ Download des Repos:
-https://superrepo.org/kodi/addon/repository.xstream/
+* https://superrepo.org/kodi/addon/repository.xstream/
 
 Zusätzlich können sie auch die neuste Version von xStream benutzen, wenn sie die Nightly bzw. Beta Version herunterladen.
-Beta: https://github.com/StoneOffStones/plugin.video.xstream/tree/beta
-Nightly: https://github.com/StoneOffStones/plugin.video.xstream/tree/nightly
+* Beta:
+   https://github.com/StoneOffStones/plugin.video.xstream/tree/beta
+* Nightly:
+   https://github.com/StoneOffStones/plugin.video.xstream/tree/nightly
 
 Wird die aktuelle 2.1.16 Beta installiert, ist es _vorher_ notwendig das script.modul Cryptopy  zu installieren:
-https://www.github.com/StoneOffStones/script.modul.cryptopy/archive/xstream.zip
+* https://www.github.com/StoneOffStones/script.modul.cryptopy/archive/xstream.zip
 
-ACHTUNG! *Für die Beta Version gibt es keinen Fehler-Support, für die Nightly erst recht nicht! Die Beta ist keine Finale Version und die Nightly ein Experimenteller Stand in denen getestet wird! Support gibt es nur für die Finale xStream Version!*
+**ACHTUNG!** *Für die Beta Version gibt es keinen Fehler-Support, für die Nightly erst recht nicht! Die Beta ist keine Finale Version und die Nightly ein Experimenteller Stand in denen getestet wird! Support gibt es nur für die Finale xStream Version!*
 
 ### b. Gibt es für mich Rechtliche Konsequenzen?
 Nein, durch unser Addon ist es ihnen möglich aus Kodi über dieses Addon einfach von den oben genannten Seiten zu streamen. Das bloße Streaming hat in Deutschland (Momentan) keine Rechtlichen Konsequenzen. Die meisten Streaming Seiten loggen ohnehin keine IP-Adressen usw. Über genaueres informieren sie sich bitte indem sie auf den einzelnen Seiten nachforschen, hier ist nochmal ein Video über das Thema Streaming verlinkt. xStream an sich bringt, allgemein keine Konsequenzen mit sich, wir sind nur die bloße Brücke.
-https://www.youtube.com/watch?v=cDmvhJrLkmM
+* https://www.youtube.com/watch?v=cDmvhJrLkmM
 
 
 ### c. Welche Seiten sind im Addon enthalten?
@@ -48,7 +50,7 @@ Wenn Sie nicht so viel klicken wollen, verwenden sie die Automatische Hosterwahl
 Fehler können verschiedene Ursachen haben. Bei Hilfe bitte immer folgendes bekannt geben:
 Log, Kodi Version, Betriebssystem, xStream Version, genaue Fehlerbeschreibung!
 Wird die aktuelle 2.1.16 Beta installiert, ist es vorher notwendig das script.modul Cryptopy  zu installieren:
-https://www.github.com/StoneOffStones/script.modul.cryptopy/archive/xstream.zip
+* https://www.github.com/StoneOffStones/script.modul.cryptopy/archive/xstream.zip
 
 Bitte, schauen Sie, ob Ihr Fehler in einem früheren Post schon beantwortet wurde!
 
@@ -71,8 +73,7 @@ Im Anschluss das Problem schildern.
 ### d. Fehlermeldung bei den Hostern
 
 Sollte dies der Fall sein, bitte den aktuellen URL Resolver installieren:
-
-https:/offshoregit.com/tvaresolvers/tva-common- repository/raw/master/zips/script.module.urlresolver/
+* https:/offshoregit.com/tvaresolvers/tva-common-repository/raw/master/zips/script.module.urlresolver/
 
 Bitte den gewünschten Film auf der Homepage auf Funktion kontrollieren.
 
@@ -87,31 +88,37 @@ Das ist immer vom Betriebssystem abhängig.
 Im Folgenden werden bekannte Ordnerstrukturen der jeweiligen Betriebssysteme aufgelistet. Anstelle von "xbmc" kann in den Ordnern auch "kodi" stehen
 (die Ordnerstruktur kann jedoch auch leicht von dieser Anleitung abweichen):
 
-Windows XP: Documents and Settings\<your_user_name>\Application Data\Kodi
+Windows XP:
+* Documents and Settings\<your_user_name>\Application Data\Kodi
 
-Vista/Windows 7: C:\Users\<your_user_name>/%APPDATA%/Roaming/Kodi/Kodi.log
-(AppData ist ein "ausgeblendeter" Ordner)
+Vista/Windows 7:
+* C:\Users\<your_user_name>/%APPDATA%/Roaming/Kodi/Kodi.log
 
-Mac OS X: /Users/<username>/Library/Logs/ oder
-/Users/<your_user_name>/Library/Application Support/Kodi/userdata
+Mac OS X:
+* /Users/<username>/Library/Logs/ oder
+* /Users/<your_user_name>/Library/Application Support/Kodi/userdata
 
-iOS: /private/var/mobile/Library/Preferences
+iOS:
+* /private/var/mobile/Library/Preferences
 
-Linux:$HOME/.kodi/temp/ oder
-$HOME/.kodi/userdata/temp/xbmc.log oder
-$HOME/.kodi/userdata (.kodi ist ein versteckter Ordner)
+Linux:
+* $HOME/.kodi/temp/
+* $HOME/.kodi/userdata/temp/xbmc.log oder
+* $HOME/.kodi/userdata
 
 und das crashlog kann auch schon mal direkt unter $HOME zu finden sein.
 
-OpenElec:$HOME/.xbmc/userdata/temp/xbmc.log oder
-$HOME/.kodi/temp/
+OpenElec:
+* $HOME/.xbmc/userdata/temp/xbmc.log
+* $HOME/.kodi/temp/
 
-Raspi: /home/pi/.kodi/temp/ oder
-/home/pi/.xbmc/temp/xbmc.log
-(zuvor "verstecke Dateien & Ordner anzeigen" aktivieren)
+Raspi:
+* /home/pi/.kodi/temp/
+* /home/pi/.xbmc/temp/xbmc.log
 
-Android:  /android/data/org.xbmc.Kodi/files/.kodi/temp oder
-data/data/org.xbmc.Kodi/cache/temp
+Android:
+* /android/data/org.xbmc.Kodi/files/.kodi/temp
+* data/data/org.xbmc.Kodi/cache/temp
 
 Die Ordner sind meist versteckt und müssen sichtbar gemacht werden, im Windows Explorer oder auf Android mit dem ESDateiexplorer.
 
@@ -124,7 +131,6 @@ Auf Android einen Texteditor verwenden zum Betrachten.
 Kodi hat Standardmäßig die beiden wichtigen Log Addons integriert (eines zum Lesen der Log, das andere zum Hochladen). Damit ist das Erstellen der Log Datei und Posten im Forum sehr viel einfacher.
 
 In Kodi gehe zu:
-
 * Desktop-Optionen
 * Einstellungen
 * Addons
@@ -147,7 +153,6 @@ Debug-Logging (Kodi GUI):
 Manchmal ist es auch gut das Debug Logging in Kodi zu aktivieren um noch mehr Informationen zu erhalten.
 
 Gehe dazu auf:
-
 * Desktop-Optionen
 * Einstellungen
 * System
