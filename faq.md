@@ -73,7 +73,7 @@ Im Anschluss das Problem schildern.
 ### d. Fehlermeldung bei den Hostern
 
 Sollte dies der Fall sein, bitte den aktuellen URL Resolver installieren:
-* https:/offshoregit.com/tvaresolvers/tva-common-repository/raw/master/zips/script.module.urlresolver/
+* https://offshoregit.com/tvaresolvers/tva-common-repository/raw/master/zips/script.module.urlresolver/
 
 Bitte den gewünschten Film auf der Homepage auf Funktion kontrollieren.
 
