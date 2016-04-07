@@ -105,37 +105,28 @@ Das ist immer vom Betriebssystem abhängig.
 Im Folgenden werden bekannte Ordnerstrukturen der jeweiligen Betriebssysteme aufgelistet. Anstelle von "xbmc" kann in den Ordnern auch "kodi" stehen
 (die Ordnerstruktur kann jedoch auch leicht von dieser Anleitung abweichen):
 
-Windows XP:
-* Documents and Settings\<your_user_name>\Application Data\Kodi
-
-Vista/Windows 7:
-* C:\Users\<your_user_name>/%APPDATA%/Roaming/Kodi/Kodi.log
-
-Mac OS X:
-* /Users/<username>/Library/Logs/ oder
-* /Users/<your_user_name>/Library/Application Support/Kodi/userdata
-
-iOS:
-* /private/var/mobile/Library/Preferences
-
-Linux:
-* $HOME/.kodi/temp/
-* $HOME/.kodi/userdata/temp/xbmc.log oder
-* $HOME/.kodi/userdata
-
-und das crashlog kann auch schon mal direkt unter $HOME zu finden sein.
-
-OpenElec:
-* $HOME/.xbmc/userdata/temp/xbmc.log
-* $HOME/.kodi/temp/
-
-Raspi:
-* /home/pi/.kodi/temp/
-* /home/pi/.xbmc/temp/xbmc.log
-
-Android:
-* /android/data/org.xbmc.Kodi/files/.kodi/temp
-* data/data/org.xbmc.Kodi/cache/temp
+- Windows XP
+    - `Documents and Settings\<your_user_name>\Application Data\Kodi`
+- Vista/Windows 7
+    - `C:\Users\<your_user_name>/%APPDATA%/Roaming/Kodi/Kodi.log`
+- Mac OS X
+    - `/Users/<username>/Library/Logs/ oder`
+    - `/Users/<your_user_name>/Library/Application Support/Kodi/userdata`
+- iOS
+    - `/private/var/mobile/Library/Preferences`
+- Linux
+    - `$HOME/.kodi/temp/`
+    - `$HOME/.kodi/userdata/temp/xbmc.log`
+    - `$HOME/.kodi/userdata`
+- OpenElec
+    - `$HOME/.xbmc/userdata/temp/xbmc.log`
+    - `$HOME/.kodi/temp/`
+- Raspberry Pi 1-3
+    - `/home/pi/.kodi/temp/`
+    - `/home/pi/.xbmc/temp/xbmc.log`
+- Android
+    - `/android/data/org.xbmc.Kodi/files/.kodi/temp`
+    - `data/data/org.xbmc.Kodi/cache/temp`
 
 Die Ordner sind meist versteckt und müssen sichtbar gemacht werden, im Windows Explorer oder auf Android mit dem ESDateiexplorer.
 
@@ -178,7 +169,7 @@ Gehe dazu auf:
 
 Fertig
 
-Es wird nun am oberen Rand eine Statuszeile eingeblendet mit Infos; Hier ist auch der Speicherort der Log-Datei zu sehen!!!!!
+Es wird nun am oberen Rand eine Statuszeile eingeblendet mit Infos; **Hier ist auch der Speicherort der Log-Datei zu sehen!**
 
 Nun Starte Kodi neu und öffne das Addon welches einen Fehler verursacht. Erstellen dann sofort eine Log-Datei (dann ist der Fehler leichter herauszulesen).
 
